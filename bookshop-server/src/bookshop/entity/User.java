@@ -2,20 +2,21 @@ package bookshop.entity;
 
 import java.util.Date;
 
-// 用户实体类 ：属性跟数据表中的列一致
 public class User {
     private int userNo;
     private String userName;
-    private String password;
+    private String userPass;
     private String phone;
-    private Date created;
+    private int state;
+    private Date createTime;
 
     public User() {
+
     }
 
-    public User(String userName, String password, String phone) {
+    public User(String userName, String userPass, String phone) {
         this.userName = userName;
-        this.password = password;
+        this.userPass = userPass;
         this.phone = phone;
     }
 
@@ -35,12 +36,12 @@ public class User {
         this.userName = userName;
     }
 
-    public String getPassword() {
-        return password;
+    public String getUserPass() {
+        return userPass;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setUserPass(String userPass) {
+        this.userPass = userPass;
     }
 
     public String getPhone() {
@@ -51,12 +52,19 @@ public class User {
         this.phone = phone;
     }
 
-    public Date getCreated() {
-        return created;
+    public int getState() {
+        return state;
     }
 
-    public void setCreated(Date created) {
-        this.created = created;
+    public void setState(int state) {
+        this.state = state;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 }
-

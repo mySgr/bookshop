@@ -17,8 +17,14 @@ public interface UserDao {
     //方法：默认public abstract（隐式公共与抽象）
     User addUser(User user) throws Exception;
 
-    User updateUser(String id, User user) throws Exception;
+    User userLogin(String user, String password) throws Exception;
 
-    List<User> getUsers(String query,int pagenum,int pagesize) throws Exception;
+    User updateUser(String id, User user) throws Exception;
+    void deleteUser(String id) throws Exception;
+    User getUser(String id) throws Exception;
+
+    int getUserCount() throws Exception;
+
+    List<User> getUsers(String query, int pagenum, int pagesize) throws Exception;
 
 }

@@ -7,8 +7,9 @@
                     <div class="grid-content bg-purple"><h3>万国书店后台管理系统</h3></div>
                 </el-col>
                 <el-col :span="4">
-                    <div class="grid-content bg-purple">
-                        <el-button class="info" @click="logout">退出</el-button>
+                    <div class="grid-content bg-purple user">
+                        <span>Hi，{{user.userName}}</span><i class="iconfont icon-zhuxiaologout11" @click="logout"
+                                                            title="退出登录"></i>
                     </div>
                 </el-col>
             </el-row>
@@ -23,7 +24,7 @@
                          text-color="#fff" active-text-color="#ffd04b" unique-opened>
                     <!-- 折叠菜单 -->
                     <div class="fold" :title="title" @click="doFold">
-                        <span :class="fold ? 'el-icon-d-arrow-right' : 'el-icon-d-arrow-left'"></span>
+                        <span :class="fold ? 'el-icon-s-unfold' : 'el-icon-s-fold'"></span>
                     </div>
                     <!--el-submenu 一级菜单 -->
                     <el-submenu index="1">
@@ -48,10 +49,10 @@
                             <i class="el-icon-notebook-2"></i>
                             <span>书籍管理</span>
                         </template>
-                        <el-menu-item index="2-1">
+                        <el-menu-item index="/booklist">
                             <span>书籍列表</span>
                         </el-menu-item>
-                        <el-menu-item index="2-2">
+                        <el-menu-item index="/bookclassify">
                             <span>书籍分类</span>
                         </el-menu-item>
                     </el-submenu>
@@ -61,7 +62,7 @@
                             <i class="el-icon-s-order"></i>
                             <span>订单管理</span>
                         </template>
-                        <el-menu-item index="3-1">
+                        <el-menu-item index="/home/order/list">
                             <span>订单列表</span>
                         </el-menu-item>
                     </el-submenu>
@@ -69,7 +70,12 @@
             </el-aside>
             <!--  主体内容-->
             <el-main>
-                <router-view></router-view>
+                <!--路由导航-->
+                <div class="foods-wrapper" ref="foodswrapper">
+                    <router-view ref="product"></router-view>
+                </div>
+
+
             </el-main>
         </el-container>
     </el-container>
@@ -77,6 +83,8 @@
 </template>
 
 <script>
+    import BScroll from 'better-scroll'
+
     export default {
         data() {
             return {
@@ -84,7 +92,9 @@
                 fold: false,
                 active: {
                     color: "#ffd04b"
-                }
+                },
+                user: JSON.parse(window.sessionStorage.getItem("user")),
+                foodScroll: '',
             }
         },
         methods: {
@@ -97,9 +107,19 @@
             doFold() {
                 this.title = this.fold ? "折叠" : "展开";
                 this.fold = !this.fold;
-            }
+            },
+            initScroll() { //实例化
+                // let product = this.$refs.product   //给需要区域滚动的内容的父盒子添加ref属性
+                // this.product = new BScroll(product, {click: true})   //better-scroll 默认会阻止浏览器的原生 click 事件,需要配置一下click属性
+                this.foodScroll = new BScroll(this.$refs.foodswrapper);
+            },
         },
         created() {
+            this.$nextTick(() => {
+                this.initScroll()
+            })
+
+
         }
     }
 </script>
@@ -110,7 +130,7 @@
         background-color: #545c64;
     }
 
-    header h3 {
+    header h3, .user {
         color: #FFFFFF;
     }
 
@@ -140,5 +160,8 @@
 
     .statu {
         color: #ffd04b;
+    }
+    .foods-wrapper{
+        height: 1px;
     }
 </style>

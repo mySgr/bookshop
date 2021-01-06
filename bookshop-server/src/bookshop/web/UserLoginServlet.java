@@ -25,7 +25,7 @@ public class UserLoginServlet extends HttpServlet {
             if (result != null) {
                 resp.getWriter().print(ResultVO.success(result, "登录成功！").toJSON());
             } else {
-                //resp.getWriter().print(ResultVO.err(400, "用户名或密码不正确，请重试！").toJSON());
+                resp.getWriter().print(ResultVO.err(400, "用户名或密码不正确，请重试！").toJSON());
             }
 
 

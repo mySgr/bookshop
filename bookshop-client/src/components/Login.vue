@@ -48,7 +48,7 @@
                     // 注意 字段名必须跟表单绑定的对象名一致
                     user: [{
                         required: true,
-                        message: '请输入你的手机号',
+                        message: '请输入你的登录帐号',
                         trigger: 'blur'
                     }],
                     password: [{
@@ -78,9 +78,9 @@
                         console.log(resp)
                         if (resp.data.code == 200) {
                             this.$message.success("登录成功")
-
-                            //登录成功后，token 保存到客户端的 sessionStorage 中
-                            window.sessionStorage.setItem('user', resp.data.data)
+                            //登录成功后，登录对象 保存到客户端的 sessionStorage 中
+                            window.sessionStorage.setItem("user", JSON.stringify(resp.data.data))
+                            // console.log(JSON.parse(window.sessionStorage.getItem("user")))
                             // 通过编程式导航跳转后台主页，路由地址是 /home
                             //声明式：<router-link :to="...">
                             //编程式： router.push(...)

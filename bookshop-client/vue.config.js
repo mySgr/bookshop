@@ -17,6 +17,14 @@ module.exports = {
                 pathRewrite: { //地址改写
                     '^/api': ''  //请求的时候使用这个api就可以
                 }
+            },
+            '/image': {
+                target: 'http://localhost:8080/bookshop',  //这里后台的地址模拟的;应该填写你们真实的后台接口
+                ws: true,
+                changOrigin: true,  //允许跨域
+                pathRewrite: { //地址改写
+                    '^/image': ''  //请求的时候使用这个api就可以
+                }
             }
         }
     }

@@ -37,8 +37,9 @@
                 </el-table-column>
                 <el-table-column label="操作">
                     <template v-slot:default="user">
-                        <el-button type="primary" @click="editUserDialogShow(user)">编辑</el-button>
-                        <el-button type="danger" @click="delUserInfo(user.row.userNo)">删除</el-button>
+                        <el-button type="primary" icon="el-icon-edit" @click="editUserDialogShow(user)">编辑</el-button>
+                        <el-button type="danger" icon="el-icon-delete" @click="delUserInfo(user.row.userNo)">删除
+                        </el-button>
                     </template>
                 </el-table-column>
             </el-table>
@@ -104,9 +105,12 @@
                         {min: 3, max: 10, message: '长度在 3 到 10 个字符', trigger: 'blur'}
                     ],
                     phone: [{
+                        required: true, message: "请输入手机号", trigger: 'blur'
+                    }, {
                         validator: checkPhone,
                         trigger: 'blur',
-                    },]
+                    },
+                    ]
                 },
 
                 //查询参数
